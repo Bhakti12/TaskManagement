@@ -1,13 +1,10 @@
-import { Response } from 'express'
-import * as E from '@effect-ts/core/Either'
-import { AppError } from './errortypes'
+import * as T from '@effect-ts/core/Effect'
+import { GeneralError } from '../errors/GeneralError'
 
-export const handleEffectResult = <A>(res: Response) => (result: E.Either<AppError, A>) => {
-    if (E.isLeft(result)) {
-        const error = result.left
-        res.status(error.statusCode).json({ message: error.message })
-    } else {
-        res.json(result.right)
-    }
-}
-export { AppError }
+export const catchAllErrors = <R, A>(effect: T.Effect<R, GeneralError, A>): T.Effect<R, GeneralError, A> =>
+    T.catchAll_(
+        effect,
+        (error) =>
+            T.fail(error)
+    )
+
