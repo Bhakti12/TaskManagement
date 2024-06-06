@@ -9,12 +9,12 @@ export const createUserService = (user: User): T.Effect<unknown, Error, User> =>
     return userResponse;
 });
 
-export const createTaskOfUser = (user_id: string, task: Task): T.Effect<unknown, Error, Task> => new T.IEffectTotal(() => {
+export const createTaskOfUserService = (user_id: string, task: Task): T.Effect<unknown, Error, Task> => new T.IEffectTotal(() => {
     const addTask = createTaskOfUserRepo(user_id, task);
     return addTask;
 });
 
-export const getAllTaskOfUser = (user_id: string): T.Effect<unknown, Error, Task[]> => new T.IEffectTotal(() => {
+export const getAllTaskOfUserService = (user_id: string): T.Effect<unknown, Error, Task[]> => new T.IEffectTotal(() => {
     const getAllTask = getAllTaskOfUserRepo(user_id);
     return getAllTask;
 });
