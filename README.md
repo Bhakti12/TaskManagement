@@ -36,6 +36,43 @@ For run test simply write **npm test** in terminal
   - Maintainability :  Promoting code organization and readability of code, With clear separation of concerns and well-defined module boundaries, developers can quickly locate and modify code related to specific functionalities.
   - Clarity and Consistency :  Developers can easily understand the structure of the application and know where to find specific functionalities.
 
+### Implementation : 
+
+We use functional programming with typescript.
+
+Why Functional Programming : 
+
+- Increased Readability : Functional Programming is often more readable because of its declarative nature.
+- Modularity : Divided into multiple functions and also we can use it in another part of code also(Reusable).
+
+For implement functional programming we use effect library of typescript which is pure typescript.<br>
+
+#### Effect : https://effect.website/
+
+Effect is a powerful TypeScript library designed to help developers easily create complex, synchronous, and asynchronous programs.<br>
+Effect is an ecosystem of tools that help you build better applications and libraries. As a result, you will also learn more about the TypeScript language and how to use the type system to make your programs more reliable and easier to maintain.<br>
+
+Typescript with Effect : 
+```
+import { Effect } from "effect"
+ 
+const divide = (a: number, b: number): Effect.Effect<number, Error, never> =>
+  b === 0
+    ? Effect.fail(new Error("Cannot divide by zero"))
+    : Effect.succeed(a / b)
+```
+
+Typical Typescript : 
+
+```
+const divide = (a: number, b: number): number => {
+  if (b === 0) {
+    throw new Error("Cannot divide by zero")
+  }
+  return a / b
+}
+```
+
 ### API : 
 
 - `POST /users`: Create a new user.
