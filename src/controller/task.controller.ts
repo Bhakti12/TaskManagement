@@ -2,7 +2,7 @@ import { Task, User } from "../types/task";
 import express,{Response} from "express";
 import * as T from "@effect-ts/core/Effect";
 import { catchAllErrors } from "../config/errorhandler";
-import { createTaskOfUserService, createUserService } from "../service/task.service";
+import { createTaskOfUserService, createUserService, getAllTaskOfUserService, getTaskOfUserService } from "../service/task.service";
 import { sendJSONResponse } from "../config/response";
 
 export const createUserController = (
@@ -39,4 +39,35 @@ export const createTaskOfUserController = (req: express.Request, res: Response):
                 break;
         }
     });
+}
+
+export const getAllTasksOfUserController = (req: express.Request, res: Response): void => {
+    const user_id = req.params.user_id;
+    const effect = getAllTaskOfUserService(user_id);
+    T.run(effect, result => {
+        switch (result._tag) {
+            case 'Success':
+                sendJSONResponse(res, null, null, result.value);
+                break;
+            case 'Failure':
+                catchAllErrors;
+                break;
+        }
+    });
+}
+
+export const getTaskOfUserController = (req: express.Request, res: Response): void => {
+    const user_id = req.params.user_id;
+    const task_id = req.params.task_id;
+    const effect = getTaskOfUserService(user_id, task_id);
+    T.run(effect, result => {
+        switch (result._tag) {
+            case 'Success':
+                sendJSONResponse(res, null, null, result.value);
+                break;
+            case 'Failure':
+                catchAllErrors;
+                break;
+        }
+    });   
 }
