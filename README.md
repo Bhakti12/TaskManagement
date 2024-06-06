@@ -1,6 +1,6 @@
 Task Management System API
 
-Backend : Typescript (Effect library)
+Backend : Typescript (Effect library : https://effect.website/)
 
 APIs : 
 
