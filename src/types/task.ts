@@ -1,7 +1,7 @@
 export type TaskStatus = 'To-DO' | 'In-Progress' | 'DONE';
 
 export declare type Task = {
-    id: string;
+    id?: string;
     title: string;
     description: string;
     date: Date;
@@ -9,7 +9,7 @@ export declare type Task = {
 };
 
 export declare type User = {
-    id: string;
+    id?: string;
     name: string;
     email: string;
     password: string;

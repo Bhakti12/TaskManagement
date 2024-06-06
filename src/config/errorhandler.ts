@@ -8,3 +8,5 @@ export const catchAllErrors = <R, A>(effect: T.Effect<R, GeneralError, A>): T.Ef
             T.fail(error)
     )
 
+
+export { GeneralError }
