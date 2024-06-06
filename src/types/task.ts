@@ -4,7 +4,7 @@ export declare type Task = {
     id?: string;
     title: string;
     description: string;
-    date: Date;
+    date: string;
     status: TaskStatus;
 };
 
