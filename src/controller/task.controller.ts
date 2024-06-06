@@ -5,6 +5,7 @@ import { catchAllErrors } from "../config/errorhandler";
 import {
   createTaskOfUserService,
   createUserService,
+  deleteTaskOfUser,
   getAllTaskOfUserService,
   getTaskOfUserService,
   updateTaskOfUser
@@ -91,18 +92,37 @@ export const updateTaskOfUserController = (
   req: express.Request,
   res: Response
 ): void => {
-    const user_id = req.params.user_id;
-    const task_id = req.params.task_id;
-    const updateTask = req.body;
-    const effect = updateTaskOfUser(user_id, task_id, updateTask);
-    T.run(effect, (result) => {
-        switch (result._tag) {
-            case "Success":
-                sendJSONResponse(res, null, null, result.value);
-                break;
-            case "Failure":
-                catchAllErrors;
-                break;
-        }
-    })
+  const user_id = req.params.user_id;
+  const task_id = req.params.task_id;
+  const updateTask = req.body;
+  const effect = updateTaskOfUser(user_id, task_id, updateTask);
+  T.run(effect, (result) => {
+    switch (result._tag) {
+      case "Success":
+        sendJSONResponse(res, null, null, result.value);
+        break;
+      case "Failure":
+        catchAllErrors;
+        break;
+    }
+  });
+};
+
+export const deleteTaskOfUserController = (
+  req: express.Request,
+  res: Response
+): void => {
+  const user_id = req.params.user_id;
+  const task_id = req.params.task_id;
+  const effect = deleteTaskOfUser(user_id, task_id);
+  T.run(effect, (result) => {
+    switch (result._tag) {
+      case "Success":
+        sendJSONResponse(res, null, null, result.value);
+        break;
+      case "Failure":
+        catchAllErrors;
+        break;
+    }
+  });
 };
