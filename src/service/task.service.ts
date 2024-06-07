@@ -10,7 +10,9 @@ export const createUserService = (user: User): T.Effect<unknown, Error, User> =>
 });
 
 export const createTaskOfUserService = (user_id: string, task: Task): T.Effect<unknown, Error, Task> => new T.IEffectTotal(() => {
+    console.log("inside task create service");
     const addTask = createTaskOfUserRepo(user_id, task);
+    console.log("add task service",addTask);
     return addTask;
 });
 

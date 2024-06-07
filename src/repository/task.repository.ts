@@ -6,24 +6,38 @@ const users: Map<string, User> = new Map();
 
 //create user
 export const createUserRepo = (user: User): any => {
-  for (let user of users) {
-    console.log(".....", user);
-  }
+  console.log('size before adding:', users.size);
   const id = uuidv4();
   const addUser = users.set(id, user);
-  console.log("after adding(add user)", addUser);
+  console.log("after adding (add user):", addUser);
+  console.log('size after adding:', users.size);
   return addUser;
 };
 
 //create task of specified user
 export const createTaskOfUserRepo = (user_id: string, task: Task): Task => {
-  const user = users.get(user_id);
+  console.log("inside create task repo");
+  console.log('size before adding',tasks, tasks.size);
 
+  // Find the user by user_id
+  const user = users.get(user_id);
+  console.log('user_id', user, user_id);
+  if (!user) {
+    throw new Error(`User with ID ${user_id} not found`);
+  }
+
+  // Generate a new task ID and create the new task object
   const taskId = uuidv4();
   const newTask: Task = { id: taskId, ...task };
-
+  console.log('task data',newTask);
+  // Add the new task to the tasks map
   tasks.set(taskId, newTask);
-  user?.tasks.push(newTask);
+
+  // Add the new task to the user's tasks array
+  user.tasks.push(newTask);
+
+  console.log('size after adding', tasks, tasks.size);
+  console.log('users',users);
 
   return newTask;
 };
@@ -31,18 +45,19 @@ export const createTaskOfUserRepo = (user_id: string, task: Task): Task => {
 //get all tasks of specified user
 export const getAllTaskOfUserRepo = (user_id: string): Task[] => {
   const userId = users.get(user_id);
+  console.log('users',users,userId);
   return userId?.tasks || [];
 };
 
 //get specfied task of specified user
 export const getTaskOfUserRepo = (user_id: string, task_id: string): Task => {
   const user = users.get(user_id);
-
+  console.log('users',users,user);
   const task = user?.tasks.find((t) => t.id === task_id);
 
   // Check if the task exists in the global tasks map
   const taskFromMap = tasks.get(task_id);
-
+  console.log('tasks',tasks,taskFromMap);
   return taskFromMap as Task;
 };
 

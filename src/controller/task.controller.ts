@@ -16,8 +16,9 @@ export const createUserController = (
   req: express.Request,
   res: Response
 ): void => {
+  console.log("inside first controller");
   const userData = req.body;
-
+  
   const effect = createUserService(userData);
 
   T.run(effect, (result) => {
@@ -36,8 +37,9 @@ export const createTaskOfUserController = (
   req: express.Request,
   res: Response
 ): void => {
-  const user_id = req.params.user_id;
+  const user_id = req.params.user_id as string || req.query.user_id as string;
   const taskData: Task = req.body;
+  console.log("request data", user_id, taskData);
   const effect = createTaskOfUserService(user_id, taskData);
   T.run(effect, (result) => {
     switch (result._tag) {
@@ -55,7 +57,7 @@ export const getAllTasksOfUserController = (
   req: express.Request,
   res: Response
 ): void => {
-  const user_id = req.params.user_id;
+  const user_id = req.params.user_id as string || req.query.user_id as string;
   const effect = getAllTaskOfUserService(user_id);
   T.run(effect, (result) => {
     switch (result._tag) {
@@ -73,8 +75,8 @@ export const getTaskOfUserController = (
   req: express.Request,
   res: Response
 ): void => {
-  const user_id = req.params.user_id;
-  const task_id = req.params.task_id;
+  const user_id = req.params.user_id as string || req.query.user_id as string;
+  const task_id = req.params.task_id as string || req.query.task_id as string;;
   const effect = getTaskOfUserService(user_id, task_id);
   T.run(effect, (result) => {
     switch (result._tag) {
@@ -92,8 +94,8 @@ export const updateTaskOfUserController = (
   req: express.Request,
   res: Response
 ): void => {
-  const user_id = req.params.user_id;
-  const task_id = req.params.task_id;
+  const user_id = req.params.user_id as string || req.query.user_id as string;
+  const task_id = req.params.task_id as string || req.query.task_id as string;
   const updateTask = req.body;
   const effect = updateTaskOfUser(user_id, task_id, updateTask);
   T.run(effect, (result) => {
@@ -112,8 +114,8 @@ export const deleteTaskOfUserController = (
   req: express.Request,
   res: Response
 ): void => {
-  const user_id = req.params.user_id;
-  const task_id = req.params.task_id;
+  const user_id = req.params.user_id as string || req.query.user_id as string;
+  const task_id = req.params.task_id as string || req.query.task_id as string;
   const effect = deleteTaskOfUser(user_id, task_id);
   T.run(effect, (result) => {
     switch (result._tag) {
