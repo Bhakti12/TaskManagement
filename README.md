@@ -10,7 +10,7 @@ To locally run backend : <br>
 - Install npm packages **npm install** in terminal <br>
 - Write **npm start** in terminal <br>
 ### Test : 
-Jest
+Jest<br>
 For run test simply write **npm test** in terminal
 
 
@@ -38,6 +38,32 @@ For run test simply write **npm test** in terminal
 
 ### Implementation : 
 
+We use typescript for implementing API<br>
+
+Why Typescript not javascript : 
+
+- JavaScript is a dynamic, loosely-typed scripting language primarily used for web development.
+- While typescript is a superset of JavaScript that adds static typing, which helps catch errors at compile time and improves code readability and maintainability.
+- TypeScript code needs to be compiled into JavaScript before it can run in a browser or Node.js environment.
+
+Javascript : 
+ ```
+function greet(name) {
+  return "Hello, " + name;
+}
+
+console.log(greet("Alice"));
+ ```
+
+Typescript : 
+```
+function greet(name: string): string {
+  return "Hello, " + name;
+}
+
+console.log(greet("Alice"));
+```
+
 We use functional programming with typescript.
 
 Why Functional Programming : 
@@ -50,6 +76,7 @@ For implement functional programming we use effect library of typescript which i
 #### Effect : https://effect.website/
 
 Effect is a powerful TypeScript library designed to help developers easily create complex, synchronous, and asynchronous programs.<br>
+
 Effect is an ecosystem of tools that help you build better applications and libraries. As a result, you will also learn more about the TypeScript language and how to use the type system to make your programs more reliable and easier to maintain.<br>
 
 Typescript with Effect : 
