@@ -9,6 +9,8 @@ To locally run backend : <br>
 
 - Install npm packages **npm install** in terminal <br>
 - Write **npm start** in terminal <br>
+- If in some case env doesn't find then add .env and PORT = any port you want to add.<br>
+
 ### Test : 
 Jest<br>
 For run test simply write **npm test** in terminal
